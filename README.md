@@ -1,36 +1,156 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+ITS Study Spot Finder
 
-## Getting Started
+ITS Study Spot Finder is a full-stack web application designed to help ITS students find suitable places to study around campus.
 
-First, run the development server:
+Students can view study spots and see information such as location, available facilities, noise level, and opening hours. Study spot data can also be added, edited, and deleted through the application.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
+Features
+View available study spots
+Add a new study spot
+Edit study spot information
+Delete a study spot
+Display available facilities:
+Wi-Fi
+Air Conditioning
+Power Outlets
+Display noise level
+Display opening hours
+Tech Stack
+Frontend
+Next.js
+React
+TypeScript
+Tailwind CSS
+Backend
+Go
+Gin
+GORM
+Database
+PostgreSQL
+Application Architecture
+
+The application uses a full-stack architecture:
+
+Next.js Frontend → Go/Gin REST API → GORM → PostgreSQL
+
+The frontend communicates with the backend using HTTP requests. The backend handles the REST API and uses GORM to communicate with the PostgreSQL database.
+
+Study Spot Data
+
+Each study spot contains:
+
+ID
+Name
+Location
+Description
+Wi-Fi availability
+AC availability
+Power outlet availability
+Noise level
+Opening hours
+API Endpoints
+Method	Endpoint	Description
+GET	/spots	Get all study spots
+GET	/spots/:id	Get a study spot by ID
+POST	/spots	Create a new study spot
+PUT	/spots/:id	Update a study spot
+DELETE	/spots/:id	Delete a study spot
+Setup
+1. Clone the repository
+
+git clone https://github.com/R3n254/its-study-spot.git
+
+Then enter the project directory:
+
+cd its-study-spot
+
+2. Frontend Setup
+
+Install the dependencies:
+
+pnpm install
+
+Start the development server:
+
 pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The frontend will run at:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Database Setup
 
-## Learn More
+Create a PostgreSQL database named:
 
-To learn more about Next.js, take a look at the following resources:
+study_spot_db
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Backend Environment Variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Create a .env file inside the backend directory.
 
-## Deploy on Vercel
+Example:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+DB_HOST=localhost
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+DB_USER=postgres
+
+DB_PASSWORD=your_postgresql_password
+
+DB_NAME=study_spot_db
+
+DB_PORT=5432
+
+Do not commit the .env file because it contains database credentials.
+
+5. Backend Setup
+
+Open another terminal:
+
+cd backend
+
+Install Go dependencies if necessary:
+
+go mod download
+
+Run the backend:
+
+go run main.go
+
+The backend API will run at:
+
+http://localhost:8080
+
+Running the Application
+
+Both servers need to be running:
+
+Frontend:
+
+pnpm dev
+
+Backend:
+
+cd backend
+
+go run main.go
+
+Then open http://localhost:3000 in your browser.
+
+CRUD Operations
+
+The application supports the four basic CRUD operations:
+
+Create — Add a new study spot
+Read — View study spots
+Update — Edit an existing study spot
+Delete — Remove a study spot
+Future Improvements
+
+Possible improvements include:
+
+Search study spots
+Filter by facilities
+Filter by noise level
+User authentication
+Study spot ratings and reviews
+More detailed campus location information
