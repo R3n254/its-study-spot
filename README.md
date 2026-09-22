@@ -1,156 +1,240 @@
-ITS Study Spot Finder
+# ITS Study Spot Finder
 
-ITS Study Spot Finder is a full-stack web application designed to help ITS students find suitable places to study around campus.
+A full-stack web application for finding and managing study spots around the ITS campus.
 
-Students can view study spots and see information such as location, available facilities, noise level, and opening hours. Study spot data can also be added, edited, and deleted through the application.
+ITS Study Spot Finder helps students view information about study locations, including available facilities, noise level, and opening hours.
 
-Features
-View available study spots
-Add a new study spot
-Edit study spot information
-Delete a study spot
-Display available facilities:
-Wi-Fi
-Air Conditioning
-Power Outlets
-Display noise level
-Display opening hours
-Tech Stack
-Frontend
-Next.js
-React
-TypeScript
-Tailwind CSS
-Backend
-Go
-Gin
-GORM
-Database
-PostgreSQL
-Application Architecture
+---
 
-The application uses a full-stack architecture:
+## Features
 
-Next.js Frontend → Go/Gin REST API → GORM → PostgreSQL
+- View available study spots
+- Add new study spots
+- Edit existing study spots
+- Delete study spots
+- View study spot information such as:
+  - Wi-Fi availability
+  - Air conditioning
+  - Power outlets
+  - Noise level
+  - Opening hours
 
-The frontend communicates with the backend using HTTP requests. The backend handles the REST API and uses GORM to communicate with the PostgreSQL database.
+---
 
-Study Spot Data
+## Tech Stack
 
-Each study spot contains:
+| Part | Technology |
+|------|------------|
+| Frontend | Next.js, React, TypeScript |
+| Styling | Tailwind CSS |
+| Backend | Go, Gin |
+| ORM | GORM |
+| Database | PostgreSQL |
+| Version Control | Git & GitHub |
 
-ID
-Name
-Location
-Description
-Wi-Fi availability
-AC availability
-Power outlet availability
-Noise level
-Opening hours
-API Endpoints
-Method	Endpoint	Description
-GET	/spots	Get all study spots
-GET	/spots/:id	Get a study spot by ID
-POST	/spots	Create a new study spot
-PUT	/spots/:id	Update a study spot
-DELETE	/spots/:id	Delete a study spot
-Setup
-1. Clone the repository
+---
 
+## Application Architecture
+
+```text
+┌─────────────────────┐
+│      Next.js        │
+│      Frontend       │
+│   localhost:3000    │
+└──────────┬──────────┘
+           │
+           │ HTTP / REST API
+           ▼
+┌─────────────────────┐
+│      Go + Gin       │
+│       Backend       │
+│   localhost:8080    │
+└──────────┬──────────┘
+           │
+           │ GORM
+           ▼
+┌─────────────────────┐
+│     PostgreSQL      │
+│      Database       │
+└─────────────────────┘
+```
+
+The Next.js frontend communicates with the Go backend through REST API requests. The backend uses GORM to interact with the PostgreSQL database.
+
+---
+
+## Study Spot Data
+
+Each study spot contains the following information:
+
+| Field | Description |
+|------|-------------|
+| ID | Unique identifier |
+| Name | Name of the study spot |
+| Location | Location around campus |
+| Description | Description of the study area |
+| Wi-Fi | Wi-Fi availability |
+| AC | Air conditioning availability |
+| Power Outlet | Power outlet availability |
+| Noise Level | Quiet, Moderate, or Loud |
+| Opening Hours | Available study hours |
+
+---
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/spots` | Get all study spots |
+| `GET` | `/spots/:id` | Get a study spot by ID |
+| `POST` | `/spots` | Add a new study spot |
+| `PUT` | `/spots/:id` | Update an existing study spot |
+| `DELETE` | `/spots/:id` | Delete a study spot |
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+Make sure the following are installed:
+
+- Node.js
+- pnpm
+- Go
+- PostgreSQL
+- Git
+
+### 1. Clone the Repository
+
+```bash
 git clone https://github.com/R3n254/its-study-spot.git
-
-Then enter the project directory:
-
 cd its-study-spot
+```
 
-2. Frontend Setup
+### 2. Install Frontend Dependencies
 
-Install the dependencies:
-
+```bash
 pnpm install
+```
 
-Start the development server:
-
-pnpm dev
-
-The frontend will run at:
-
-http://localhost:3000
-
-3. Database Setup
+### 3. Set Up PostgreSQL
 
 Create a PostgreSQL database named:
 
+```text
 study_spot_db
+```
 
-4. Backend Environment Variables
+### 4. Configure the Backend
 
-Create a .env file inside the backend directory.
+Create a `.env` file inside the `backend` directory:
 
-Example:
+```text
+its-study-spot/
+└── backend/
+    └── .env
+```
 
+Add your PostgreSQL configuration:
+
+```env
 DB_HOST=localhost
-
 DB_USER=postgres
-
 DB_PASSWORD=your_postgresql_password
-
 DB_NAME=study_spot_db
-
 DB_PORT=5432
+```
 
-Do not commit the .env file because it contains database credentials.
+> **Note:** Never commit the `.env` file because it contains database credentials.
 
-5. Backend Setup
+### 5. Run the Backend
 
-Open another terminal:
+Open a terminal:
 
+```bash
 cd backend
-
-Install Go dependencies if necessary:
-
 go mod download
-
-Run the backend:
-
 go run main.go
+```
 
-The backend API will run at:
+The backend will run at:
 
+```text
 http://localhost:8080
+```
 
-Running the Application
+### 6. Run the Frontend
 
-Both servers need to be running:
+Open another terminal from the project root:
 
-Frontend:
-
+```bash
 pnpm dev
+```
 
-Backend:
+The frontend will run at:
 
-cd backend
+```text
+http://localhost:3000
+```
 
-go run main.go
+Open it in your browser to use the application.
 
-Then open http://localhost:3000 in your browser.
+---
 
-CRUD Operations
+## CRUD Operations
 
-The application supports the four basic CRUD operations:
+The application implements the four main CRUD operations:
 
-Create — Add a new study spot
-Read — View study spots
-Update — Edit an existing study spot
-Delete — Remove a study spot
-Future Improvements
+| Operation | Implementation |
+|-----------|----------------|
+| **Create** | Add a new study spot |
+| **Read** | View study spots |
+| **Update** | Edit study spot information |
+| **Delete** | Remove a study spot |
 
-Possible improvements include:
+---
 
-Search study spots
-Filter by facilities
-Filter by noise level
-User authentication
-Study spot ratings and reviews
-More detailed campus location information
+## Project Structure
+
+```text
+its-study-spot/
+│
+├── app/
+│   ├── spots/
+│   │   ├── new/
+│   │   │   └── page.tsx
+│   │   │
+│   │   └── [id]/
+│   │       └── edit/
+│   │           └── page.tsx
+│   │
+│   └── page.tsx
+│
+├── backend/
+│   ├── main.go
+│   ├── go.mod
+│   └── go.sum
+│
+├── components/
+│   └── DeleteButton.tsx
+│
+├── public/
+├── package.json
+└── README.md
+```
+
+---
+
+## Future Improvements
+
+Some features that could be added in the future:
+
+- Search for study spots
+- Filter by available facilities
+- Filter by noise level
+- User authentication
+- Ratings and reviews
+- More detailed campus location information
+
+---
